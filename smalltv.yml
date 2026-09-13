@@ -235,6 +235,10 @@ sensor:
     entity_id: sensor.kuma_summary
     attribute: down_count
   - platform: homeassistant
+    id: kuma_pending
+    entity_id: sensor.kuma_summary
+    attribute: pending_count
+  - platform: homeassistant
     id: netalertx_new
     entity_id: sensor.netalertx_new
 
@@ -535,9 +539,12 @@ display:
           y += step;
 
           int n_kuma_down = (int) id(kuma_down).state;
-          auto kuma_color = n_kuma_down > 0 ? id(color_ironman_red) : id(color_green);
+          int n_kuma_pending = (int) id(kuma_pending).state;
+          auto kuma_color = id(color_green);
+          if (n_kuma_down > 0) kuma_color = id(color_ironman_red);
+          else if (n_kuma_pending > 0) kuma_color = id(color_ironman_yellow);
           it.printf(6, y, id(roboto_22), id(color_white), TextAlign::TOP_LEFT, "Kuma");
-          it.printf(6, y+28, id(roboto_22), kuma_color, TextAlign::TOP_LEFT, "%d down", n_kuma_down);
+          it.printf(6, y+28, id(roboto_22), kuma_color, TextAlign::TOP_LEFT, "%d down / %d pending", n_kuma_down, n_kuma_pending);
           y += step;
 
           int n_na_new = (int) id(netalertx_new).state;
