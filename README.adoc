@@ -70,7 +70,7 @@ There are two ways to flash the ESPHome firmware to the SmallTV Pro:
 == Prepare the SmallTV Pro for ESPHome
 The SmallTV Pro needs to be prepared to accept custom ESPHome firmware.
 At the bottom there are two screws. When removed it allows to remove the the inner "tray" which holds the PCB.
-There are 6 pads on the PCB for UART connection. The following connections are needed:
+There are 6 pads on the PCB for UART connection. Pad 1 (GND) is the pad closest to the edge of the board; the others follow in order. The following connections are needed:
 
 ----
 ⬜️ 1 GND
